@@ -6,12 +6,13 @@ const client = new discord.Client({
 const {token} = require("./json/token.json");
 const RPN_module = require("./js/RPN.js");
 const course = require("./json/course.json");
+const keep_alive = require("./sever.js");
 
 client.on("ready", () => {
    console.log(`logged in as ${client.user.tag}`); 
 });
 
-client.on("message", msg => {
+client.on("message", (msg) => {
    if (msg.content.substring(0, 1) == '$') {
       let args = msg.content.substring(1).split(' ');
       let cmd = args[0];
@@ -33,7 +34,12 @@ client.on("message", msg => {
       else if (cmd == "calculate") {
          let RPN = new RPN_module(args);
          let ans = RPN.calculate();
-         msg.reply(ans.toString());
+         try {
+            msg.reply(ans.toString());
+         }
+         catch (error) {
+            msg.reply("錯誤");
+         }
       }
       else if (cmd == "subject") {
          msg.reply(course[args[1]]);
@@ -42,4 +48,5 @@ client.on("message", msg => {
    
 });
 
+// keep_alive();
 client.login(token);
