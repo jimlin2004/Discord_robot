@@ -21,20 +21,20 @@ client.on("message", (msg) => {
          msg.reply("HI!!!");
       } 
       else if (cmd == "call") {
-        try{
+         try{
             if (parseInt(args[args_num - 1]) > 10)
-                msg.reply("次數太多，現在限定10以內");
+               msg.reply("次數太多，現在限定10以內");
             else {
-                let str = "";
-                for (let i = 1; i < (args_num - 1); i++)
-                   str += args[i] + ' ';
-                for (let i = 0; i < parseInt(args[args_num - 1]); i++)
-                   msg.reply(str);
-             }
-        }
-        catch (error) {
+               let str = "";
+               for (let i = 1; i < (args_num - 1); i++)
+                  str += args[i] + ' ';
+               for (let i = 0; i < parseInt(args[args_num - 1]); i++)
+                  msg.reply(str);
+            }
+      }
+      catch (error) {
             msg.reply("未知錯誤");
-        }
+      }
       }
       else if (cmd == "calculate") {
          let RPN = new RPN_module(args);
@@ -48,9 +48,9 @@ client.on("message", (msg) => {
       }
       else if (cmd == "subject") {
             if (!course[args[1]])
-                msg.reply("無此課程");
+               msg.reply("無此課程");
             else
-                msg.reply(course[args[1]]);
+               msg.reply(course[args[1]]);
       }
    }
    
